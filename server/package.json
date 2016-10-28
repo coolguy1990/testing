@@ -1,0 +1,69 @@
+{
+  "name": "homeautomation",
+  "version": "0.0.1",
+  "description": "homeautomation using IoT",
+  "private": true,
+  "scripts": {
+    "start": "nodemon ./bin/www",
+    "knex": "./node_modules/.bin/knex --cwd . --knexfile config/index.js",
+    "test": "./node_modules/.bin/mocha test/**/*.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coolguy1990/home-automation.git"
+  },
+  "author": "Kunal Mangaraj <mangaraj.kunal@gmail.com>",
+  "contributors": [
+    {
+      "name": "Test Name",
+      "email": "test@example.com"
+    }
+  ],
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/coolguy1990/home-automation/issues"
+  },
+  "homepage": "https://github.com/coolguy1990/home-automation#readme",
+  "dependencies": {
+    "amqp": "^0.2.6",
+    "bcryptjs": "^2.3.0",
+    "bluebird": "^3.4.1",
+    "body-parser": "~1.15.1",
+    "bookshelf": "^0.10.2",
+    "compass": "^0.1.1",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "dotenv": "^2.0.0",
+    "express": "^4.14.0",
+    "file-stream-rotator": "^0.0.7",
+    "fs-extra": "^0.30.0",
+    "jsonwebtoken": "^7.1.9",
+    "knex": "^0.12.4",
+    "lodash": "^4.16.4",
+    "method-override": "^2.3.6",
+    "moment": "^2.15.1",
+    "moment-timezone": "^0.5.6",
+    "mongoose": "^4.5.9",
+    "morgan": "~1.7.0",
+    "mysql": "^2.11.1",
+    "node-compass": "0.2.3",
+    "node-uuid": "^1.4.7",
+    "pg": "^6.1.0",
+    "pg-promise": "^5.3.1",
+    "pug": "^2.0.0-beta5",
+    "serve-favicon": "~2.3.0",
+    "validator": "^6.0.0",
+    "winston": "^2.2.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.11.4",
+    "chai": "^3.5.0",
+    "chai-http": "^3.0.0",
+    "commander": "^2.9.0",
+    "karma-chrome-launcher": "^2.0.0",
+    "mocha": "^3.1.2",
+    "mocha-junit-reporter": "^1.12.1",
+    "nodemon": "^1.11.0",
+    "sinon": "^1.17.6"
+  }
+}

@@ -37,7 +37,6 @@ app.use(require('node-compass')({ mode: 'expanded' }));
 app.use(express.static(path.join(__dirname, 'public')));
 
 // APPLICATION ROUTES GOES HERE
-
 /*
 **********************
 * UnProtected Routes *

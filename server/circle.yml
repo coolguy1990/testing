@@ -1,0 +1,28 @@
+machine:
+    services:
+        - mysql
+    node:
+        version: 0.12
+    environment:
+        APP_ENV: testing
+        DB_CONNECTION: mysql
+        DB_HOST: 127.0.0.1
+        DB_DATABASE: circle_test
+        DB_USER: ubuntu
+        DB_PASSWORD:
+dependencies:
+    pre:
+        - nvm install 6.1
+        - nvm alias default 6.1
+        - rm -rf ./node_modules
+    override:
+        - npm install --dev
+    cache_directories:
+        - ~/.npm
+test:
+    override:
+        - node --version
+        - nvm use 6.1; node --version
+        - mocha test --reporter mocha-junit-reporter:
+            environment:
+                MOCHA_FILE: $CIRCLE_TEST_REPORTS/junit/test-results.xml

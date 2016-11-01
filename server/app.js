@@ -51,7 +51,7 @@ app.use('/api', require('./routes'));
 ********************
 */
 // User CRUD Routes
-app.use('/api/users', isAuthenticated, require('./routes/users'));
+// app.use('/api/users', isAuthenticated, require('./routes/users'));
 app.use('/api/users', require('./routes/users'));
 
 // Module CRUD Routes

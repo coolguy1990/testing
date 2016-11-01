@@ -2,7 +2,7 @@
 const chai = require('chai'),
   chaiHttp = require('chai-http'),
   server = require('../../../app'),
-  // should = chai.should(),
+  should = chai.should(),
   User = require('../../../models/users'),
   db = require('../../../models/base/knex');
 /* eslint-enable one-var */

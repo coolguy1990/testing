@@ -2,7 +2,9 @@
 const chai = require('chai'),
   chaiHttp = require('chai-http'),
   server = require('../../../app'),
+  /* eslint-disable no-unused-vars */
   should = chai.should(),
+  /* eslint-enable no-unused-vars */
   User = require('../../../models/users'),
   db = require('../../../models/base/knex');
 /* eslint-enable one-var */

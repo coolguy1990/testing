@@ -1,8 +1,7 @@
-/* eslint-disable one-var */
-const knex = require('knex'),
-  config = require('../../config'),
-  environment = process.env.APP_ENV,
-  db = knex(config[environment]);
-/* eslint-enable one-var */
+const knex = require('knex');
+const config = require('../../config');
+
+const environment = process.env.APP_ENV;
+const db = knex(config[environment]);
 
 module.exports = db;

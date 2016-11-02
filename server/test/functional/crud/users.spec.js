@@ -1,46 +1,46 @@
-/* eslint-disable one-var */
-const chai = require('chai'),
-  chaiHttp = require('chai-http'),
-  server = require('../../../app'),
-  /* eslint-disable no-unused-vars */
-  should = chai.should(),
-  /* eslint-enable no-unused-vars */
-  User = require('../../../models/users'),
-  db = require('../../../models/base/knex');
-/* eslint-enable one-var */
+const chai = require('chai');
+const chaiHttp = require('chai-http');
+const server = require('../../../app');
+/* eslint-disable no-unused-vars */
+const should = chai.should();
+/* eslint-enable no-unused-vars */
+const User = require('../../../models/users');
+const db = require('../../../models/base/knex');
 
 chai.use(chaiHttp);
 
-describe('Users', function () {
-  beforeEach(function (done) {
+describe('Users', () => {
+  beforeEach((done) => {
     db.migrate.rollback()
-    .then(function () {
+    .then(() => {
       db.migrate.latest()
-      .then(function () {
+      .then(() => {
         new User({
           name: 'Kunal',
           email: 'mangaraj.kunal@gmail.coms',
-          password: 'testing'
+          password: 'testing',
         })
         .save()
-        .then(function (user) {
+        /* eslint-disable no-unused-vars */
+        .then((user) => {
+        /* eslint-enable no-unused-vars */
           done();
         });
       });
     });
   });
 
-  afterEach(function (done) {
+  afterEach((done) => {
     db.migrate.rollback()
-    .then(function () {
+    .then(() => {
       done();
     });
   });
 
-  it('should list All users on /api/users GET', function (done) {
+  it('should list All users on /api/users GET', (done) => {
     chai.request(server)
     .get('/api/users')
-    .end(function (err, res) {
+    .end((err, res) => {
       if (err) {
         done(err);
       }
@@ -51,19 +51,19 @@ describe('Users', function () {
     });
   });
 
-  it('should list a single user on  /api/users/:id GET', function (done) {
+  it('should list a single user on  /api/users/:id GET', (done) => {
     /* eslint-disable no-unused-vars */
     const newUser = new User({
     /* eslint-enable no-unused-vars */
       name: 'Kunal',
       email: 'mangaraj.kunal@gmail.coms',
-      password: 'testing'
+      password: 'testing',
     })
     .save()
-    .then(function (user) {
+    .then((user) => {
       chai.request(server)
       .get(`/api/users/${user.get('id')}`)
-      .end(function (err, res) {
+      .end((err, res) => {
         if (err) {
           done(err);
         }
@@ -77,15 +77,15 @@ describe('Users', function () {
     });
   });
 
-  it('should add a single user on /api/users POST', function (done) {
+  it('should add a single user on /api/users POST', (done) => {
     chai.request(server)
     .post('/api/users')
     .send({
       name: 'Test User',
       email: 'foo@bar.com',
-      password: 'fubar'
+      password: 'fubar',
     })
-    .end(function (err, res) {
+    .end((err, res) => {
       if (err) {
         done(err);
       }
@@ -96,24 +96,24 @@ describe('Users', function () {
       done();
     });
   });
-  it('should update a single user on /api/users/:id PUT', function (done) {
+  it('should update a single user on /api/users/:id PUT', (done) => {
     chai.request(server)
       .post('/api/users')
       .send({
         name: 'Test User',
         email: 'foo@bar.com',
-        password: 'fubar'
+        password: 'fubar',
       })
-      .end(function (err, res) {
+      .end((err, res) => {
         if (err) {
           done(err);
         }
         chai.request(server)
           .put(`/api/users/${res.body.data.id}`)
           .send({
-            name: 'Cookie'
+            name: 'Cookie',
           })
-          .end(function (error, response) {
+          .end((error, response) => {
             if (error) {
               done(error);
             }
@@ -126,21 +126,21 @@ describe('Users', function () {
       });
   });
 
-  it('should delete a single user on /api/users/:id DELETE', function (done) {
+  it('should delete a single user on /api/users/:id DELETE', (done) => {
     chai.request(server)
       .post('/api/users')
       .send({
         name: 'Test User',
         email: 'foo@bar.com',
-        password: 'fubar'
+        password: 'fubar',
       })
-      .end(function (err, res) {
+      .end((err, res) => {
         if (err) {
           done(err);
         }
         chai.request(server)
           .delete(`/api/users/${res.body.data.id}`)
-          .end(function (error, response) {
+          .end((error, response) => {
             if (error) {
               done(error);
             }

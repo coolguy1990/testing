@@ -1,10 +1,9 @@
-/* eslint-disable one-var */
-const _ = require('lodash'),
-  db = require('./knex'),
-  uuid = require('node-uuid'),
-  moment = require('moment'),
-  bookshelf = require('bookshelf');
-/* eslint-enable one-var */
+const _ = require('lodash');
+const db = require('./knex');
+const uuid = require('node-uuid');
+const moment = require('moment');
+const bookshelf = require('bookshelf');
+
 let baseBookshelf = {};
 
 baseBookshelf = bookshelf(db);
@@ -19,7 +18,7 @@ baseBookshelf.Model = baseBookshelf.Model.extend({
   // default value setup for each model
   defaults: function defaults() {
     return {
-      uuid: uuid.v4()
+      uuid: uuid.v4(),
     };
   },
 
@@ -30,7 +29,7 @@ baseBookshelf.Model = baseBookshelf.Model.extend({
 
   // fix dates before saving to db
   fixDatesWhenSave: function fixDates(attrs) {
-    _.each(attrs, function each(value, key) {
+    _.each(attrs, (value, key) => {
       if (value !== null && (key === 'updated_at' || key === 'created_at')) {
         attrs[key] = moment(value).format('YYYY-MM-DD HH:mm:ss');
       }
@@ -41,7 +40,7 @@ baseBookshelf.Model = baseBookshelf.Model.extend({
 
   // fix dates when fetching
   fixDatesWhenFetch: function fixDates(attrs) {
-    _.each(attrs, function each(value, key) {
+    _.each(attrs, (value, key) => {
       if (value !== null && (key === 'updated_at' || key === 'created_at')) {
         attrs[key] = moment(value).toDate();
       }
@@ -72,7 +71,7 @@ baseBookshelf.Model = baseBookshelf.Model.extend({
 
   hasDateChanged(attr) {
     return moment(this.get(attr)).diff(moment(this.updated(attr))) !== 0;
-  }
+  },
 });
 
 module.exports = baseBookshelf;

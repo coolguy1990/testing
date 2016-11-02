@@ -8,15 +8,15 @@ module.exports = {
       host: process.env.DB_HOSTNAME,
       database: process.env.DB_DATABASE,
       user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD
+      password: process.env.DB_PASSWORD,
     },
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
     migrations: {
-      tableName: 'migrations'
-    }
+      tableName: 'migrations',
+    },
     // debug: true
   },
 
@@ -26,15 +26,15 @@ module.exports = {
       host: process.env.DB_HOSTNAME,
       database: process.env.DB_DATABASE,
       user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD
+      password: process.env.DB_PASSWORD,
     },
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
     migrations: {
-      tableName: 'migrations'
-    }
+      tableName: 'migrations',
+    },
     // debug: true
   },
 
@@ -44,16 +44,16 @@ module.exports = {
       host: process.env.DB_HOSTNAME,
       database: process.env.DB_DATABASE,
       user: process.env.DB_USER,
-      password: process.env.DB_PASSWORD
+      password: process.env.DB_PASSWORD,
       /* eslint-enable no-process-env */
     },
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
     migrations: {
-      tableName: 'migrations'
-    }
+      tableName: 'migrations',
+    },
     // debug: true
   },
 
@@ -62,15 +62,15 @@ module.exports = {
     connection: {
       database: 'my_db',
       user: 'username',
-      password: 'password'
+      password: 'password',
     },
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
     migrations: {
-      tableName: 'knex_migrations'
-    }
+      tableName: 'knex_migrations',
+    },
   },
 
   production: {
@@ -78,15 +78,14 @@ module.exports = {
     connection: {
       database: 'my_db',
       user: 'username',
-      password: 'password'
+      password: 'password',
     },
     pool: {
       min: 2,
-      max: 10
+      max: 10,
     },
     migrations: {
-      tableName: 'knex_migrations'
-    }
-  }
-
+      tableName: 'knex_migrations',
+    },
+  },
 };

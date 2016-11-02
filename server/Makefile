@@ -15,3 +15,5 @@ jenkins:
 
 linting:
 	./node_modules/.bin/eslint -c .eslintrc.js -f checkstyle . > lintresults.xml || true
+
+.PHONY: migrate testing jenkins linting

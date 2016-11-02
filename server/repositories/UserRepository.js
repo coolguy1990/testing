@@ -15,19 +15,19 @@ module.exports = {
   createUser: function createUser(obj) {
     const self = this;
 
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       self.checkUserExists(obj.email)
-        .then(function (data) {
+        .then((data) => {
           if (data.status) {
             reject(new Error('User already exists'));
           } else {
             new User({
               name: obj.name,
               email: obj.email,
-              password: bcrypt.hashSync(obj.password, process.env.APP_SECRET)
+              password: bcrypt.hashSync(obj.password, process.env.APP_SECRET),
             })
             .save()
-            .then(function (user) {
+            .then((user) => {
               resolve(user.attributes);
             })
             .catch(reject);
@@ -38,17 +38,17 @@ module.exports = {
   },
 
   checkUserExists: function checkUserExists(email) {
-    return new Promise(function (resolve, reject) {
+    return new Promise((resolve, reject) => {
       /* eslint-disable no-unused-vars */
       const user = new User({
       /* eslint-enable no-unused-vars */
-        email
+        email,
       })
       .orderBy('created_at', 'DESC')
       .fetch({
-        require: true
+        require: true,
       })
-      .then(function (savedUser) {
+      .then((savedUser) => {
         let status = false;
 
         if (savedUser.attributes) {
@@ -56,14 +56,14 @@ module.exports = {
         }
         resolve({
           status,
-          user: savedUser.attributes
+          user: savedUser.attributes,
         });
       })
-      .catch(User.NotFoundError, function (err) {
+      .catch(User.NotFoundError, (err) => {
         resolve({
           status: false,
           user: null,
-          message: err
+          message: err,
         });
       })
       .catch(TypeError, reject);
@@ -73,16 +73,16 @@ module.exports = {
   // update user
   updateUser: function updateUser(userId, obj, callback) {
     return User.forge({
-      id: userId
+      id: userId,
     })
     .fetch({
-      require: true
+      require: true,
     })
-    .then(function (user) {
+    .then((user) => {
       callback(
         user.save({
           name: obj.name || user.get('name'),
-          email: obj.email || user.get('email')
+          email: obj.email || user.get('email'),
         })
       );
     });
@@ -91,12 +91,12 @@ module.exports = {
   // delete user
   deleteUser: function deleteUser(userId, callback) {
     return User.forge({
-      id: userId
+      id: userId,
     })
     .fetch({
-      require: true
+      require: true,
     })
-    .then(function (user) {
+    .then((user) => {
       callback(
         user.destroy()
       );
@@ -106,7 +106,7 @@ module.exports = {
   // get user
   getUserById: function getUserById(userId) {
     return User.forge({
-      id: userId
+      id: userId,
     })
     .fetch();
   },
@@ -116,10 +116,10 @@ module.exports = {
     return User.forge()
       .query({
         where: {
-          email
-        }
+          email,
+        },
       })
       .orderBy('created_at', 'DESC')
       .fetch();
-  }
+  },
 };

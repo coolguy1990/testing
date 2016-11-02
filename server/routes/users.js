@@ -1,92 +1,92 @@
 const express = require('express');
-const router = express.Router();
 const models = require('../models');
 const userRepo = require('../repositories/UserRepository');
 
+const router = express.Router();
 models.init();
 
 // get all users
-router.get('/', function (req, res, next) {
+router.get('/', (req, res) => {
   userRepo.getAllUsers()
-  .then(function (collection) {
+  .then((collection) => {
     res.json({
       error: false,
-      data: collection.toJSON()
+      data: collection.toJSON(),
     });
   })
-  .catch(function (err) {
+  .catch((err) => {
     res.status(500)
     .json({
       error: true,
       data: {
-        message: err.message
-      }
+        message: err.message,
+      },
     });
   });
 });
 
 // create user
-router.post('/', function (req, res, next) {
+router.post('/', (req, res) => {
   userRepo.createUser({
     name: req.body.name,
     email: req.body.email,
-    password: req.body.password
+    password: req.body.password,
   })
-  .then(function (user) {
+  .then((user) => {
     res.json({ error: false, data: { id: user.id } });
   })
-  .catch(function (err) {
+  .catch((err) => {
     res.status(500).json({ error: true, data: { message: err.message } });
   });
 });
 
 // get user
-router.get('/:id', function (req, res, next) {
+router.get('/:id', (req, res) => {
   userRepo
   .getUserById(req.params.id)
-  .then(function (user) {
+  .then((user) => {
     if (!user) {
       res.status(404).json({ error: true, data: {} });
     }
 
     res.json({ error: false, data: user.toJSON() });
   })
-  .catch(function (err) {
+  .catch((err) => {
     res.status(500).json({ error: true, data: { message: err.message } });
   });
 });
 
 // update user
-router.put('/:id', function (req, res, next) {
+router.put('/:id', (req, res) => {
   userRepo.updateUser(req.params.id, {
     name: req.body.name,
-    email: req.body.email
-  }, function (user) {
+    email: req.body.email,
+  }, (user) => {
     user
-    .then(function () {
+    .then(() => {
       res.json({ error: false, data: { message: 'User details updated' } });
     })
-    .catch(function (err) {
+    .catch((err) => {
       res.status(500).json({ error: true, data: { message: err.message } });
     });
   })
-  .catch(function (err) {
+  .catch((err) => {
     res.status(500).json({ error: true, data: { message: err.message } });
   });
 });
 
 // delete user
-router.delete('/:id', function (req, res, next) {
-  userRepo.deleteUser(req.params.id, function (user) {
+router.delete('/:id', (req, res) => {
+  userRepo.deleteUser(req.params.id, (user) => {
     user
-    .then(function () {
+    .then(() => {
       res.json({ error: false, data: { message: 'User successfully deleted' } });
     })
-    .catch(function (err) {
+    .catch((err) => {
       res.status(500).json({ error: true, data: { message: err.message } });
     });
   })
-  .catch(function (err) {
+  .catch((err) => {
     res.status(500).json({ error: true, data: { message: err.message } });
   });
 });

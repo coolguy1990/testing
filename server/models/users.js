@@ -1,12 +1,11 @@
-/* eslint-disable one-var */
 const baseBookshelf = require('./base');
+
 let User = {};
-/* eslint-enable one-var */
 
 User = baseBookshelf.Model.extend({
   tableName: 'users',
 
-  hidden: [ 'password' ],
+  hidden: ['password'],
 
   modules() {
     return this.hasMany('Modules');
@@ -14,7 +13,7 @@ User = baseBookshelf.Model.extend({
 
   systems() {
     return this.hasMany('Systems');
-  }
+  },
 });
 
 module.exports = baseBookshelf.model('User', User);

@@ -1,11 +1,10 @@
-/* eslint-disable one-var */
-const userRepo = require('../../repositories/UserRepository'),
-  bcrypt = require('bcryptjs'),
-  jwt = require('jsonwebtoken');
-/* eslint-enable one-var */
-const authenticate = function (req, res, next) {
+const userRepo = require('../../repositories/UserRepository');
+const bcrypt = require('bcryptjs');
+const jwt = require('jsonwebtoken');
+
+const authenticate = (req, res) => {
   userRepo.getUserByEmail(req.body.email)
-  .then(function (user) {
+  .then((user) => {
     if (!user) {
       res.status(500)
         .json({ error: true, data: { message: 'User doesnt exists' } });
@@ -13,7 +12,7 @@ const authenticate = function (req, res, next) {
 
     if (bcrypt.compareSync(req.body.password, user.get('password'))) {
       const token = jwt.sign({
-        data: user.get('email')
+        data: user.get('email'),
       }, process.env.APP_SECRET, {
         // 24hrs
         expiresIn: '24h',
@@ -22,31 +21,31 @@ const authenticate = function (req, res, next) {
         audience: 'http://localhost:3000',
         issuer: 'http://localhost:3000',
         jwtid: user.get('id').toString(),
-        subject: user.get('name')
+        subject: user.get('name'),
       });
 
       res.json({
         error: false,
         data: {
           message: 'Login Success',
-          token
-        }
+          token,
+        },
       });
     } else {
       res.status(401)
         .json({
           error: true,
           data: {
-            message: 'Authentication Failed. Wrong password.'
-          }
+            message: 'Authentication Failed. Wrong password.',
+          },
         });
     }
   })
-  .catch(function (err) {
+  .catch((err) => {
     res.status(500).json({ error: true, data: { message: err.message } });
   });
 };
 
 module.exports = {
-  authenticate
+  authenticate,
 };

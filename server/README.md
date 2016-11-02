@@ -1,3 +1,5 @@
+[![Build Status](http://ec2-54-152-64-250.compute-1.amazonaws.com:8080/buildStatus/icon?job=testserver)](http://ec2-54-152-64-250.compute-1.amazonaws.com:8080/job/testserver)
+
 ## Server Setup
 
 1. Install latest version of node, npm and yarn

@@ -1,11 +1,10 @@
-/* eslint-disable one-var */
-const User = require('../users'),
-  baseBookshelf = require('../base');
-/* eslint-enable one-var */
+const User = require('../users');
+const baseBookshelf = require('../base');
+
 let Users = {};
 
 Users = baseBookshelf.Collection.extend({
-  model: User
+  model: User,
 });
 
 module.exports = baseBookshelf.collection('Users', Users);
